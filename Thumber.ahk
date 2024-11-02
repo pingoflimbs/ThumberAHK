@@ -336,13 +336,13 @@ F15 & t up::
 	RmouseState=0
 	Return
 
-F15 & g::
+F15 & [::
 	if(RmouseState==0)
 	mouseClick,middle,,,1,,D,
 	RmouseState=1
 	Return
 
-F15 & g up::
+F15 & [ up::
 	MouseClick,middle,,,1,,U,
 	RmouseState=0
 	Return
@@ -426,7 +426,7 @@ F15 & f::
 ;****************************************************************
 ;		Date
 ;****************************************************************
-F15 & .:: 
+F15 & g:: 
 	FormatTime, CurrentDateTime,, yyyyMMdd
 	SendInput %CurrentDateTime%
 	Return
