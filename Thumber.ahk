@@ -5,8 +5,9 @@ SetWorkingDir %A_ScriptDir%  ; 스크립트의 작업 디렉토리를 스크립�
 #Persistent
 #SingleInstance, Force; Force를 추가하면, 스크립트가 이미 실행 중일 때 새로운 인스턴스가 시작되면 기존의 인스턴스를 자동으로 대체합니다.
 TrayTip ,Thumber On, [Ver.20241020],1,1
-FileEncoding, UTF-8-RAW
-
+FileEncoding, UTF-8
+;KeyHistory
+;#InstallKeybdHook
 
 
 
