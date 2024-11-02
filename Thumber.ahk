@@ -56,6 +56,7 @@ SelectProgram(program)
         Run, %program%
         currentIndex := 1
     }
+	Return
 }
 
 ;****************************************************************
@@ -248,15 +249,16 @@ appsFunc:
 	{		
 		;TrayTip ,testTitle, once,1,1
 	}
-	if counter = 1 ; The key is pressed twice
+	else if counter = 1 ; The key is pressed twice
 	{		
 		Send,{appskey}
 		;TrayTip ,testTitle, twice,1,1
 	}
-	if counter = 2 ; The key is pressed thrice
+	else if counter = 2 ; The key is pressed thrice
 	{
 		Gui, Show, NoActivate
 		TrayTip ,testTitle, triple,1,1
+		helpManual()
 	}
 	counter = -1
 	Return
@@ -692,8 +694,6 @@ Return
 \ & p::SendInput ~
 Return
 
-KeyHistory
-#InstallKeybdHook
 
 ;****************************************************************
 ;		A ~ L
