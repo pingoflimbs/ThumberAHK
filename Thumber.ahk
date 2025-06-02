@@ -4,9 +4,8 @@ SetWorkingDir %A_ScriptDir%  ; 스크립트의 작업 디렉토리를 스크립�
 #MaxHotkeysPerInterval 10000; 지정된 시간 간격 동안 실행될 수 있는 최대 핫키 수를 설정합니다.기본값은 70이지만, 이를 10000으로 증가시켜 더 많은 핫키가 빠르게 연속해서 실행될 수 있도록 합니다.이는 매크로나 자동화 스크립트에서 유용할 수 있지만, 시스템 리소스를 많이 사용할 수 있으므로 주의가 필요합니다.
 #Persistent
 #SingleInstance, Force; Force를 추가하면, 스크립트가 이미 실행 중일 때 새로운 인스턴스가 시작되면 기존의 인스턴스를 자동으로 대체합니다.
-TrayTip ,Thumber On, [Ver.20241020],1,1
+TrayTip ,Thumber On, [Ver.20250602],1,1
 FileEncoding, UTF-8-RAW
-
 
 
 
