@@ -26,11 +26,12 @@ SetStoreCapsLockMode Off
 ;****************************************************************
 ; 매뉴얼 GUI  
 ;****************************************************************
-; [{c:"#FFFFFF",t:"#808080",d:true},"~\n`",{d:true},"!\n1",{d:true},"@\n2",{d:true},"#\n3",{d:true},"$\n4",{d:true},"%\n5",{d:true},"^\n6",{d:true},"&\n7",{d:true},"*\n8",{d:true},"(\n9",{d:true},")\n0",{d:true},"_\n-",{d:true},"+\n=",{w:2,d:true},"Backspace"],
-; [{w:1.5,d:true},"Tab",{d:true},"Q",{d:true},"W",{d:true},"E",{d:true},"R",{d:true},"T",{d:true},"Y",{a:7,f:4},"◁",{f:6},"▲",{f:4},"▷","△",{a:4,f:3,d:true},"{\n[",{d:true},"}\n]",{w:1.5,d:true},"|\n\\"],
-; [{w:1.75},"Caps Lock",{d:true},"A",{d:true},"S",{d:true},"D",{d:true},"F",{d:true},"G",{d:true},"H",{a:7,f:4},"◀",{f:6},"▼",{f:4},"▶",{a:4},"\n;\n\n\n\n\n\n\n\n▽",{f:3,d:true},"\"\n'",{w:2.25,d:true},"Enter"],
-; [{w:2.25,d:true},"Shift",{d:true},"Z",{d:true},"X",{d:true},"C",{d:true},"V",{d:true},"B",{d:true},"N",{d:true},"M",{d:true},"<\n,",{d:true},">\n.",{d:true},"?\n/",{w:2.75,d:true},"Shift"],
-; [{w:1.25,d:true},"Ctrl",{w:1.25,d:true},"Win",{w:1.25,d:true},"Alt",{a:7,w:6.25,d:true},"",{a:4,w:1.25,d:true},"Alt",{w:1.25,d:true},"Win",{w:1.25,d:true},"Menu",{w:1.25,d:true},"Ctrl"]
+; [{c:"#f0f0f0",t:"#a8a8a8"},"\n`\n\n\n~",{a:3},"\n\n\n\n\n!\n\n\n\n\n\n1","\n\n\n\n\n@\n\n\n\n\n\n2","\n\n\n\n\n#\n\n\n\n\n\n3","\n\n\n\n\n$\n\n\n\n\n\n4","\n\n\n\n\n%\n\n\n\n\n\n5","\n\n\n\n\n^\n\n\n\n\n\n6","\n\n\n\n\n&\n\n\n\n\n\n7","\n\n\n\n\n*\n\n\n\n\n\n8","\n\n\n\n\n(\n\n\n\n\n\n9","\n\n\n\n\n)\n\n\n\n\n\n0","\n\n\n\n\n_\n\n\n\n\n\n-","\n\n\n\n\n+\n\n\n\n\n\n=",{a:7,w:2},"\n\n\n\nBackspace"],
+; [{w:1.5},"\n\n\n\nTab","\n\n\n\nQ","\n\n\n\nW","\n\n\n\nE","\n\n\n\nR","\n\n\n\nT","\n\n\n\nY",{c:"#D0D4C0",t:"#000000",f:4},"◁\n\n\n\nU",{c:"#B8C0A8",f:6},"▲\n\n\n\nI",{c:"#D0D4C0",f:4},"▷\n\n\n\nO","△\n\n\n\nP",{c:"#f0f0f0",t:"#a8a8a8",f:3},"\n\n\n\n[","\n\n\n\n]",{w:1.5},"\n\n\n\n\\"],
+; [{c:"#ce4c31",t:"#000000",w:1.75},"Fn\n\n\n\nCaps Lock",{c:"#f0f0f0",t:"#a8a8a8"},"\n\n\n\nA","\n\n\n\nS","\n\n\n\nD",{c:"#C9B99B",t:"#000000",a:5,n:true},"Left\n\n\n\nF\n\nClick","Right\n\n\n\nG\n\nClick",{c:"#f0f0f0",t:"#a8a8a8",a:7},"\n\n\n\nH",{c:"#B8C0A8",t:"#000000",f:4,n:true},"◀\n\n\n\nJ",{f:6},"▼\n\n\n\nK",{f:4},"▶\n\n\n\nL",{c:"#D0D4C0"},"▽\n\n\n\n;",{c:"#f0f0f0",t:"#a8a8a8",f:3},"\n\n\n\n\"",{w:2.25},"\n\n\n\nEnter"],
+; [{w:2.25},"\n\n\n\nShift",{c:"#E0D5C7",t:"#000000",a:5},"Ctrl\n\n\n\nZ\n\nZ","Ctrl\n\n\n\nX\n\nX","Ctrl\n\n\n\nC\n\nC","Ctrl\n\n\n\nV\n\nV",{c:"#f0f0f0",t:"#a8a8a8",a:7},"\n\n\n\nB","\n\n\n\nN","\n\n\n\nM",{a:4},"\n,\n\n\n<","\n.\n\n\n>","\n/\n\n\n?",{a:7,w:2.75},"\n\n\n\nShift"],
+; [{w:1.25},"\n\n\n\nCtrl",{w:1.25},"\n\n\n\nWin",{w:1.25},"\n\n\n\nAlt",{w:6.25},"",{w:1.25},"\n\n\n\nAlt",{w:1.25},"\n\n\n\nWin",{w:1.25},"\n\n\n\nMenu",{w:1.25},"\n\n\n\nCtrl"]
+
 
 imagePath := A_ScriptDir . "\thumber_basic_help.png"
 Gui, +AlwaysOnTop +ToolWindow -Caption +E0x10000  ; WS_EX_LAYERED
