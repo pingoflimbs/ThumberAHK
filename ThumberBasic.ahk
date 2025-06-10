@@ -23,114 +23,20 @@ SetStoreCapsLockMode Off
 ;	LShift  Z   X   C   V   B   .   ,   N   M   /    RShift
 ;	Cps ` Fn     ===========F`15=======F`16 한자    방향키
 
-Gui, +AlwaysOnTop -Caption +ToolWindow
-Gui, Color, 333333
-Gui, Font, s12
+;****************************************************************
+; 매뉴얼 GUI  
+;****************************************************************
+; [{c:"#FFFFFF",t:"#808080",d:true},"~\n`",{d:true},"!\n1",{d:true},"@\n2",{d:true},"#\n3",{d:true},"$\n4",{d:true},"%\n5",{d:true},"^\n6",{d:true},"&\n7",{d:true},"*\n8",{d:true},"(\n9",{d:true},")\n0",{d:true},"_\n-",{d:true},"+\n=",{w:2,d:true},"Backspace"],
+; [{w:1.5,d:true},"Tab",{d:true},"Q",{d:true},"W",{d:true},"E",{d:true},"R",{d:true},"T",{d:true},"Y",{a:7,f:4},"◁",{f:6},"▲",{f:4},"▷","△",{a:4,f:3,d:true},"{\n[",{d:true},"}\n]",{w:1.5,d:true},"|\n\\"],
+; [{w:1.75},"Caps Lock",{d:true},"A",{d:true},"S",{d:true},"D",{d:true},"F",{d:true},"G",{d:true},"H",{a:7,f:4},"◀",{f:6},"▼",{f:4},"▶",{a:4},"\n;\n\n\n\n\n\n\n\n▽",{f:3,d:true},"\"\n'",{w:2.25,d:true},"Enter"],
+; [{w:2.25,d:true},"Shift",{d:true},"Z",{d:true},"X",{d:true},"C",{d:true},"V",{d:true},"B",{d:true},"N",{d:true},"M",{d:true},"<\n,",{d:true},">\n.",{d:true},"?\n/",{w:2.75,d:true},"Shift"],
+; [{w:1.25,d:true},"Ctrl",{w:1.25,d:true},"Win",{w:1.25,d:true},"Alt",{a:7,w:6.25,d:true},"",{a:4,w:1.25,d:true},"Alt",{w:1.25,d:true},"Win",{w:1.25,d:true},"Menu",{w:1.25,d:true},"Ctrl"]
 
-keys := []
-keys.Push(["esc","F1","F2","F3","F4","F5","F6","F7","F8","F9","F10","F11","F12","del"])
-keys.Push(["``","1","2","3","4","5","6","7","8","9","0","-","=","bksp"])
-keys.Push(["tab","Q","W","E","R","T","Y","U","I","O","P","[","]","\"])
-keys.Push(["cplk","A","S","D","F","G","H","J","K","L",";","'","Enter"])
-keys.Push(["lshift","Z","X","C","V","B","N","M",",",".","/","rshift"])
-keys.Push(["ctrl","win","alt","space","alt","ctrl"])
-
-size := 8
-y := 8
-for i, row in keys {
-	x := 8
-    for j, key in row 
-	{
-		if(i=1)
-		{
-			if(key = "esc")
-			{
-				h:= 4 * size
-				w:= 11 * size
-			}
-			else if(key = "del")
-			{
-				h:= 4 * size
-				w:= 11 * size
-			}
-			else
-			{
-				h:= 4 * size
-				w:= 8 * size
-			}			
-		}
-        else if (key = "ctrl" or key = "alt" or key = "\")
-		{
-			h:= 8 * size
-			w:= 10 * size
-		}
-		else if (key = "tab")
-		{
-			h:= 8 * size
-			w:= 12 * size
-		}
-        else if (key = "cplk" or key = "bksp")
-		{
-			h:= 8 * size
-			w:= 14 * size		
-		}
-		else if (key = "lshift")
-		{
-			h:= 8 * size
-			w:= 18 * size	
-		}
-		else if (key = "enter")
-		{
-			h:= 8 * size
-			w:= (18 * size) - (12)
-		}
-		else if (key = "rshift")
-		{
-			h:= 8 * size
-			w:= (22 * size) - (8)
-		}
-		else if (key = "space")
-		{
-			h:= 8 * size
-			w:= 56 * size
-		}
-        else
-		{
-			h:= 8 * size
-			w:= 8 * size
-		}
-        		
-		c := 0
-		if(key == "j" or key = "k"  or key = "l"  or key = "i")
-		{
-			c := 1
-		}
-		if(key == "u" or key = "o")
-		{
-			c := 2
-		}
-		if(key == "u" or key = "o")
-		{
-			c := 3
-		}		
-
-		Gui, Add, Button, x%x% y%y% w%w% h%h%, %key%
-	
-		
-		x := w + x + 4
-    }
-    y := (size *8) + y + 4
-}
-
-Gui, +LastFound
-WinSet, Transparent, 200
-
-
-setButtonColor(hwnd, color) 
-{
-    static init := OnMessage(0x0133, "WM_CTLCOLORBTN")
-    return DllCall("SendMessage", "Ptr", hwnd, "UInt", 0x172, "Ptr", 0, "Ptr", color)
-}
+imagePath := A_ScriptDir . "\thumber_basic_help.png"
+Gui, +AlwaysOnTop +ToolWindow -Caption +E0x10000  ; WS_EX_LAYERED
+; Gui, Color, 990000
+Gui, Add, Picture, vMyPic Center, %imagePath%
+Gui, Show, AutoSize Hide
 
 ;****************************************************************
 ; FnKey
@@ -202,26 +108,22 @@ AddToStartupFolder()
 ;****************************************************************
 ; 			UP / DOWN / LEFT / RIGHT / PAGE UP/ PAGE DOWN / HOME / END
 ;****************************************************************
+Capslock & i::Up
+	return
 Capslock & j::Left
 	return
 Capslock & k::Down
 	return
-Capslock & i::Up
-	return
 Capslock & l::Right
 	return
-
 Capslock & u::Home
 	return
 Capslock & o::End
 	return
-
 Capslock & p::PgUp
 	return
-	
 Capslock & `;::PgDn
 	return
-
 
 
 ;****************************************************************
