@@ -4,6 +4,7 @@ SetWorkingDir %A_ScriptDir%  ; 스크립트의 작업 디렉토리를 스크립�
 #MaxHotkeysPerInterval 10000; 지정된 시간 간격 동안 실행될 수 있는 최대 핫키 수를 설정합니다.기본값은 70이지만, 이를 10000으로 증가시켜 더 많은 핫키가 빠르게 연속해서 실행될 수 있도록 합니다.이는 매크로나 자동화 스크립트에서 유용할 수 있지만, 시스템 리소스를 많이 사용할 수 있으므로 주의가 필요합니다.
 #Persistent
 #SingleInstance, Force; Force를 추가하면, 스크립트가 이미 실행 중일 때 새로운 인스턴스가 시작되면 기존의 인스턴스를 자동으로 대체합니다.
+DetectHiddenWindows, On
 TrayTip ,Thumber On, [Ver.20250602],1,1
 FileEncoding, UTF-8-RAW
 
@@ -85,72 +86,86 @@ SelectProgram(program)
 ;	LShift  Z   X   C   V   B   .   ,   N   M   /    RShift
 ;	Cps ` Fn     ===========F`15=======F`16 한자    방향키
 
-Gui, +AlwaysOnTop -Caption +ToolWindow
-Gui, Color, 333333
-Gui, Font, s8 c
+; Gui, +AlwaysOnTop -Caption +ToolWindow
+; Gui, Color, 333333
+; Gui, Font, s8 c
 
-keys := []
-keys.Push(["esc","F1","F2","F3","F4","F5","F6","F7","F8","F9","F10","F11","F12","del"])
-keys.Push(["``","1","2","3","4","5","6","7","8","9","0","-","=","bksp"])
-keys.Push(["tab","Q","W","E","R","T","Y","U","I","O","P","[","]","\"])
-keys.Push(["cplk","A","S","D","F","G","H","J","K","L",";","'","Enter"])
-keys.Push(["lshift","Z","X","C","V","B","N","M",",",".","/","rshift"])
-keys.Push(["ctrl","win","alt","space","alt","ctrl"])
+; keys := []
+; keys.Push(["esc","F1","F2","F3","F4","F5","F6","F7","F8","F9","F10","F11","F12","del"])
+; keys.Push(["``","1","2","3","4","5","6","7","8","9","0","-","=","bksp"])
+; keys.Push(["tab","Q","W","E","R","T","Y","U","I","O","P","[","]","\"])
+; keys.Push(["cplk","A","S","D","F","G","H","J","K","L",";","'","Enter"])
+; keys.Push(["lshift","Z","X","C","V","B","N","M",",",".","/","rshift"])
+; keys.Push(["ctrl","win","alt","space","alt","ctrl"])
 
-size := 30
-y := 5
-for i, row in keys {	
-	x := 5
-    for j, key in row 
-	{
-		if(i=1){
-			h:= 0.5 * size
-			w:= 1 * size
-		}
-        else if (key = "ctrl" or key = "alt" or key = "\")
-		{
-			h:= 1 * size
-			w:= 1.25 * size
-		}
-		else if (key = "tab")
-		{
-			h:= 1 * size
-			w:= 1.5 * size
-		}
-        else if (key = "cplk" or key = "bksp")
-		{
-			h:= 1 * size
-			w:= 1.75 * size
-		}
-		else if (key = "lshift" or key = "enter")
-		{
-			h:= 1 * size
-			w:= 2.25 * size
-		}
-		else if (key = "rshift")
-		{
-			h:= 1 * size
-			w:= 2.75 * size
-		}
-		else if (key = "space")
-		{
-			h:= 1 * size
-			w:= 7.5 * size
-		}
-        else
-		{
-			h:= 1 * size
-			w:= 1 * size
-		}
+; size := 30
+; y := 5
+; for i, row in keys {	
+; 	x := 5
+;     for j, key in row 
+; 	{
+; 		if(i=1){
+; 			h:= 0.5 * size
+; 			w:= 1 * size
+; 		}
+;         else if (key = "ctrl" or key = "alt" or key = "\")
+; 		{
+; 			h:= 1 * size
+; 			w:= 1.25 * size
+; 		}
+; 		else if (key = "tab")
+; 		{
+; 			h:= 1 * size
+; 			w:= 1.5 * size
+; 		}
+;         else if (key = "cplk" or key = "bksp")
+; 		{
+; 			h:= 1 * size
+; 			w:= 1.75 * size
+; 		}
+; 		else if (key = "lshift" or key = "enter")
+; 		{
+; 			h:= 1 * size
+; 			w:= 2.25 * size
+; 		}
+; 		else if (key = "rshift")
+; 		{
+; 			h:= 1 * size
+; 			w:= 2.75 * size
+; 		}
+; 		else if (key = "space")
+; 		{
+; 			h:= 1 * size
+; 			w:= 7.5 * size
+; 		}
+;         else
+; 		{
+; 			h:= 1 * size
+; 			w:= 1 * size
+; 		}
             
-		Gui, Add, Button, x%x% y%y% w%w% h%h%, %key%        
-		x := w + x + 5
-    }
-    y := size + y + 5
-}
+; 		Gui, Add, Button, x%x% y%y% w%w% h%h%, %key%        
+; 		x := w + x + 5
+;     }
+;     y := size + y + 5
+; }
 
-Gui, +LastFound
-WinSet, Transparent, 100
+; Gui, +LastFound
+; WinSet, Transparent, 100
+
+
+
+
+;****************************************************************
+; 매뉴얼 GUI  
+;****************************************************************
+
+imagePath := A_ScriptDir . "\thumber_help.png"
+Gui, +AlwaysOnTop +ToolWindow -Caption +E0x00001  ; WS_EX_LAYERED
+; Gui, Color, 990000
+Gui, Add, Picture, vMyPic Center, %imagePath%
+Gui, Show, AutoSize Hide
+
 
 ;****************************************************************
 ; 대체키맵 모디적용
@@ -233,9 +248,6 @@ appskey & esc::
 ;****************************************************************
 ;F15 기본세팅
 ;****************************************************************
-
-    
-	
 helpManual()
 {
 	GetKeyState, stateF15, F15
