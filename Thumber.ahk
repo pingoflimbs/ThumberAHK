@@ -5,7 +5,7 @@ SetWorkingDir %A_ScriptDir%  ; 스크립트의 작업 디렉토리를 스크립�
 #Persistent
 #SingleInstance, Force; Force를 추가하면, 스크립트가 이미 실행 중일 때 새로운 인스턴스가 시작되면 기존의 인스턴스를 자동으로 대체합니다.
 DetectHiddenWindows, On
-TrayTip ,Thumber On, [Ver.20250602],1,1
+TrayTip ,Thumber On, [Ver.20250610],1,1
 FileEncoding, UTF-8-RAW
 
 
@@ -186,17 +186,6 @@ SelectProgram(program)
 
 
 ;****************************************************************
-; 매뉴얼 GUI  
-;****************************************************************
-
-imagePath := A_ScriptDir . "\thumber_help.png"
-Gui, +AlwaysOnTop +ToolWindow -Caption +E0x00001  ; WS_EX_LAYERED
-; Gui, Color, 990000
-Gui, Add, Picture, vMyPic Center, %imagePath%
-Gui, Show, AutoSize Hide
-
-
-;****************************************************************
 ; 대체키맵 모디적용
 ;****************************************************************
 ReKey(input_key) {
@@ -289,6 +278,15 @@ helpManual()
 	Return
 }
 
+
+;****************************************************************
+; 매뉴얼 GUI  
+;****************************************************************
+; --- 이미지 파일이 있는지 먼저 확인 ---
+; GUI 정의
+
+
+
 F15 Up::
 	Gui, Hide
 	if counter >= 0 ; setTimer already started, so we log the keypress instead
@@ -313,8 +311,10 @@ appsFunc:
 	}
 	if counter = 2 ; The key is pressed thrice
 	{
-		Gui, Show, NoActivate
-		TrayTip ,testTitle, triple,1,1
+		imagePath := A_ScriptDir . "\Thumber_help.png"
+		Gui +AlwaysOnTop +ToolWindow -Caption
+		Gui, Add, Picture, , %imagePath%
+		Gui, Show, , CenteredImage
 	}
 	counter = -1
 	Return
