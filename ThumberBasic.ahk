@@ -33,12 +33,6 @@ SetStoreCapsLockMode Off
 ; [{w:1.25},"\n\n\n\nCtrl",{w:1.25},"\n\n\n\nWin",{w:1.25},"\n\n\n\nAlt",{w:6.25},"",{w:1.25},"\n\n\n\nAlt",{w:1.25},"\n\n\n\nWin",{w:1.25},"\n\n\n\nMenu",{w:1.25},"\n\n\n\nCtrl"]
 
 
-imagePath := A_ScriptDir . "\thumber_basic_help.png"
-Gui, +AlwaysOnTop +ToolWindow -Caption +E0x10000  ; WS_EX_LAYERED
-; Gui, Color, 990000
-Gui, Add, Picture, vMyPic Center, %imagePath%
-Gui, Show, AutoSize Hide
-
 ;****************************************************************
 ; FnKey
 ;****************************************************************
@@ -46,20 +40,23 @@ Gui, Show, AutoSize Hide
 return
 
 *$CapsLock Up::
+	Gui, Hide
 	FnCount++
 	setTimer,FnAct, 300
 Return
 
 FnAct:	
-	setTimer,FnAct,off
-	Gui, Hide
+	setTimer,FnAct,off	
 	if(FnCount = 2)
 	{
 		SendInput {Capslock}
 	}
 	if(FnCount >= 3)
 	{
-		Gui, Show, NoActivate
+		imagePath := A_ScriptDir . "\ThumberBasic.png"
+		Gui +AlwaysOnTop +ToolWindow -Caption
+		Gui, Add, Picture, , %imagePath%
+		Gui, Show, , CenteredImage
 	}
 	FnCount = 0
 Return
