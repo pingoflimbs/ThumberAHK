@@ -2,10 +2,10 @@
 setlocal
 
 :: 파일 및 폴더 설정
-set AHK_FILE=ThumberBasic.ahk
-set EXE_NAME=ThumberBasic.exe
-set SHORTCUT_NAME=ThumberBasic.lnk
-set IMG_NAME=ThumberBasic_help.png
+set AHK_FILE=Thumber.ahk
+set EXE_NAME=Thumber.exe
+set SHORTCUT_NAME=Thumber.lnk
+set IMG_NAME=Thumber.png
 
 :: 경로 설정
 set AHK2EXE="%ProgramFiles%\AutoHotkey\Compiler\Ahk2Exe.exe"
@@ -24,7 +24,7 @@ if not exist "%TARGET_DIR%" (
 %AHK2EXE% /in "%SCRIPT_DIR%%AHK_FILE%" /out "%SCRIPT_DIR%%EXE_NAME%"
 if not exist "%SCRIPT_DIR%%EXE_NAME%" (
     echo 컴파일 실패. 경로를 확인하세요.
-    pause        
+    pause    
 )
 
 :: [1/4] AHK 강제종료
@@ -63,8 +63,7 @@ echo.
 echo.
 echo.
 echo.
-echo ThumberBasic is registered as STARTUP
-echo.
+echo Thumber is registered as STARTUP
 echo.
 echo.
 echo.
