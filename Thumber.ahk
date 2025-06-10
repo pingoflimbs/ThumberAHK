@@ -23,6 +23,35 @@ FileEncoding, UTF-8-RAW
 
 
 ;****************************************************************
+; 설정파일
+;****************************************************************
+IniFile := "ThumberSettings.ini"
+IniSection := "Stats"
+IniKey := "Count"
+
+; 1. 저장된 값 불러오기 (없으면 0으로 초기화)
+IniRead, press_count, %IniFile%, %IniSection%, %IniKey%, 0
+
+; 2. F1 키 누르면 press_count 증가
+F1::
+    press_count++
+    ToolTip You pressed F1 %press_count% times
+    ; 저장
+    IniWrite, %press_count%, %IniFile%, %IniSection%, %IniKey%
+    return
+
+; 3. 종료 시 저장 (예외적으로 안전하게)
+OnExit("SaveCount")
+
+SaveCount() {
+    global press_count, IniFile, IniSection, IniKey
+    IniWrite, %press_count%, %IniFile%, %IniSection%, %IniKey%
+}
+
+
+
+
+;****************************************************************
 ; 10진수 -> 2진수로 변경
 ;****************************************************************
 DecimalToBinary(decimal)
