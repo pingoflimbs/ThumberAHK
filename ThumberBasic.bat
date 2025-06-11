@@ -6,6 +6,8 @@ set AHK_FILE=ThumberBasic.ahk
 set EXE_NAME=ThumberBasic.exe
 set SHORTCUT_NAME=ThumberBasic.lnk
 set IMG_NAME=ThumberBasic.png
+set OFF_AHK_FILE=ThumberBasic_Off.ahk
+set OFF_EXE_NAME=ThumberBasic_Off.exe
 
 :: 경로 설정
 set AHK2EXE="%ProgramFiles%\AutoHotkey\Compiler\Ahk2Exe.exe"
@@ -27,6 +29,12 @@ if not exist "%SCRIPT_DIR%%EXE_NAME%" (
     pause        
 )
 
+%AHK2EXE% /in "%SCRIPT_DIR%%OFF_AHK_FILE%" /out "%SCRIPT_DIR%%OFF_EXE_NAME%"
+if not exist "%SCRIPT_DIR%%OFF_EXE_NAME%" (
+    echo 컴파일 실패. 경로를 확인하세요.
+    pause
+)
+
 :: [1/4] AHK 강제종료
 taskkill /f /im %EXE_NAME% /t >nul 2>&1
 
@@ -35,23 +43,26 @@ taskkill /f /im %EXE_NAME% /t >nul 2>&1
 del /Y "%TARGET_DIR%\%EXE_NAME%" >nul 2>&1
 copy /Y "%SCRIPT_DIR%%EXE_NAME%" "%TARGET_DIR%\%EXE_NAME%"
 
+del /Y "%TARGET_DIR%\%OFF_EXE_NAME%" >nul 2>&1
+copy /Y "%SCRIPT_DIR%%OFF_EXE_NAME%" "%TARGET_DIR%\%OFF_EXE_NAME%"
+
 del /Y "%TARGET_DIR%\%IMG_NAME%" >nul 2>&1
 copy /Y "%SCRIPT_DIR%%IMG_NAME%" "%TARGET_DIR%\%IMG_NAME%"
 
 :: [3/4] 바로가기 생성 (복사된 파일 기준)
 :: echo [3/4] Creating shortcut ...
 powershell -noprofile -command ^
-  "$s = (New-Object -COM WScript.Shell).CreateShortcut('%SCRIPT_DIR%%SHORTCUT_NAME%');" ^
+  "$s = (New-Object -COM WScript.Shell).CreateShortcut('%TARGET_DIR%\%SHORTCUT_NAME%');" ^
   "$s.TargetPath = '%TARGET_DIR%\%EXE_NAME%';" ^
   "$s.WorkingDirectory = '%TARGET_DIR%';" ^
   "$s.Save()"
 
 :: [4/4] 시작프로그램 폴더에 바로가기 복사
 :: echo [4/4] Registering shortcut to startup ...
-copy /Y "%SCRIPT_DIR%%SHORTCUT_NAME%" "%STARTUP_FOLDER%\%SHORTCUT_NAME%"
-copy /Y "%SCRIPT_DIR%%SHORTCUT_NAME%" "%STARTUP_FOLDER_COMMON%\%SHORTCUT_NAME%"
-del "%SCRIPT_DIR%%SHORTCUT_NAME%" >nul 2>&1
-
+:: copy /Y "%TARGET_DIR%\%SHORTCUT_NAME%" "%STARTUP_FOLDER%\%SHORTCUT_NAME%"
+del /Y "%STARTUP_FOLDER_COMMON%\%SHORTCUT_NAME%" >nul 2>&1
+copy /Y "%TARGET_DIR%\%SHORTCUT_NAME%" "%STARTUP_FOLDER_COMMON%\%SHORTCUT_NAME%"
+del /Y "%TARGET_DIR%\%SHORTCUT_NAME%" >nul 2>&1
 start "" "%TARGET_DIR%\%EXE_NAME%"
 
 echo.
