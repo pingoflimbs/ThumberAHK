@@ -4,4 +4,6 @@ Thumber.lnk
 ThumberBasic.exe
 ThumberBasic_Off.exe
 ThumberBasic.lnk
-Release/**
+Release/*
+Tools/BatToExePortable/*
+!Tools/BatToExePortable/BatToExePortable.exe
