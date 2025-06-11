@@ -5,7 +5,7 @@ SetWorkingDir %A_ScriptDir%  ; 스크립트의 작업 디렉토리를 스크립�
 #Persistent
 #SingleInstance, Force; Force를 추가하면, 스크립트가 이미 실행 중일 때 새로운 인스턴스가 시작되면 기존의 인스턴스를 자동으로 대체합니다.
 DetectHiddenWindows, On
-TrayTip ,Thumber On, [Ver.20250610],1,1
+TrayTip ,Thumber On, [Ver.20250611],1,1
 FileEncoding, UTF-8-RAW
 
 
@@ -20,36 +20,13 @@ FileEncoding, UTF-8-RAW
 ;    \_/    \__|  \__|\__|  \__|\______|\__|  \__|\_______/ \________|\________| \______/ 
 
 
-
-
-;****************************************************************
-; 설정파일
-;****************************************************************
-IniFile := "ThumberSettings.ini"
-IniSection := "Stats"
-IniKey := "Count"
-
-; 1. 저장된 값 불러오기 (없으면 0으로 초기화)
-IniRead, press_count, %IniFile%, %IniSection%, %IniKey%, 0
-
-; 2. F1 키 누르면 press_count 증가
-F1::
-    press_count++
-    ToolTip You pressed F1 %press_count% times
-    ; 저장
-    IniWrite, %press_count%, %IniFile%, %IniSection%, %IniKey%
-    return
-
-; 3. 종료 시 저장 (예외적으로 안전하게)
-OnExit("SaveCount")
-
-SaveCount() {
-    global press_count, IniFile, IniSection, IniKey
-    IniWrite, %press_count%, %IniFile%, %IniSection%, %IniKey%
-}
-
-
-
+global imagePath := A_ScriptDir . "\Thumber.png"
+global IniFile := A_ScriptDir . "\Thumber.ini"
+global SEC_Help := "Help"
+global KEY_LoadCnt := "LoadCnt"
+global LmouseState=0
+global RmouseState=0
+global MmouseState=0
 
 ;****************************************************************
 ; 10진수 -> 2진수로 변경
@@ -68,13 +45,6 @@ DecimalToBinary(decimal)
     return binary
 }
 
-
-;****************************************************************
-; 마우스 
-;****************************************************************
-LmouseState=0
-RmouseState=0
-MmouseState=0
 
 ;****************************************************************
 ; 프로그램 선택
@@ -104,84 +74,6 @@ SelectProgram(program)
         currentIndex := 1
     }
 }
-
-;****************************************************************
-; HELP GUI
-;****************************************************************
-;	Esc F1  F2  F3  F4  F5  F6  F7  F8  F8  F10 F11 F12 Del
-; 	Win 1   2   3   4   5   6   7   8   9   0   _   =   Bsp
-;	Alt  Q   W   E   R   T   [   ]   Y   U   I   O   P  Tab
-;	Ctrl  A   S   D   F   G  F`13 F`14 H   J   K   L   Enter
-;	LShift  Z   X   C   V   B   .   ,   N   M   /    RShift
-;	Cps ` Fn     ===========F`15=======F`16 한자    방향키
-
-; Gui, +AlwaysOnTop -Caption +ToolWindow
-; Gui, Color, 333333
-; Gui, Font, s8 c
-
-; keys := []
-; keys.Push(["esc","F1","F2","F3","F4","F5","F6","F7","F8","F9","F10","F11","F12","del"])
-; keys.Push(["``","1","2","3","4","5","6","7","8","9","0","-","=","bksp"])
-; keys.Push(["tab","Q","W","E","R","T","Y","U","I","O","P","[","]","\"])
-; keys.Push(["cplk","A","S","D","F","G","H","J","K","L",";","'","Enter"])
-; keys.Push(["lshift","Z","X","C","V","B","N","M",",",".","/","rshift"])
-; keys.Push(["ctrl","win","alt","space","alt","ctrl"])
-
-; size := 30
-; y := 5
-; for i, row in keys {	
-; 	x := 5
-;     for j, key in row 
-; 	{
-; 		if(i=1){
-; 			h:= 0.5 * size
-; 			w:= 1 * size
-; 		}
-;         else if (key = "ctrl" or key = "alt" or key = "\")
-; 		{
-; 			h:= 1 * size
-; 			w:= 1.25 * size
-; 		}
-; 		else if (key = "tab")
-; 		{
-; 			h:= 1 * size
-; 			w:= 1.5 * size
-; 		}
-;         else if (key = "cplk" or key = "bksp")
-; 		{
-; 			h:= 1 * size
-; 			w:= 1.75 * size
-; 		}
-; 		else if (key = "lshift" or key = "enter")
-; 		{
-; 			h:= 1 * size
-; 			w:= 2.25 * size
-; 		}
-; 		else if (key = "rshift")
-; 		{
-; 			h:= 1 * size
-; 			w:= 2.75 * size
-; 		}
-; 		else if (key = "space")
-; 		{
-; 			h:= 1 * size
-; 			w:= 7.5 * size
-; 		}
-;         else
-; 		{
-; 			h:= 1 * size
-; 			w:= 1 * size
-; 		}
-            
-; 		Gui, Add, Button, x%x% y%y% w%w% h%h%, %key%        
-; 		x := w + x + 5
-;     }
-;     y := size + y + 5
-; }
-
-; Gui, +LastFound
-; WinSet, Transparent, 100
-
 
 
 
@@ -234,6 +126,53 @@ CHANGE_PROGRAM(exeName)
 }
 
 
+;****************************************************************
+; 매뉴얼 GUI  
+;****************************************************************
+; --- 이미지 파일이 있는지 먼저 확인 ---
+; GUI 정의
+showHelp(level)
+{
+	Gui +AlwaysOnTop +ToolWindow -Caption
+	Gui, Add, Picture, , %imagePath%
+	Gui, Show, , CenteredImage
+	WinSet, Transparent, 180, CenteredImage
+}
+
+;****************************************************************
+; 설정파일
+;****************************************************************
+LoadIni(sec, key) {
+    value := ""
+    if (sec = "" || key = "") {
+		return 0
+	}
+    IniRead, value, %IniFile%, %sec%, %key%, 0  ; 기본값 0 설정    
+    if value is integer
+        return value
+    else
+        return 0
+}
+
+SaveIni(sec, key, value) {
+	; IniFile := A_ScriptDir . "\Thumber.ini"
+    if (sec = "" || key = "") {        
+        return false
+    }    
+    IniWrite, %value%, %IniFile%, %sec%, %key%
+    return true
+}
+
+IncreaseHelpCnt()
+{	
+	val := LoadIni(SEC_Help, KEY_LoadCnt)
+	val++
+	SaveIni(SEC_Help, KEY_LoadCnt, val)
+	val--
+	return val
+}
+
+
 ; $$$$$$\ $$\     $$\  $$$$$$\ $$$$$$$$\ $$$$$$$$\ $$\      $$\ 
 ;$$  __$$\\$$\   $$  |$$  __$$\\__$$  __|$$  _____|$$$\    $$$ |
 ;$$ /  \__|\$$\ $$  / $$ /  \__|  $$ |   $$ |      $$$$\  $$$$ |
@@ -246,45 +185,22 @@ CHANGE_PROGRAM(exeName)
 ;****************************************************************
 ; 일시정지, 재시작
 ;****************************************************************
-<+>+up::
-	;CHANGE_PROGRAM("ThumberOff.ahk")
-	CHANGE_PROGRAM("ThumberOff.exe")
+<+>+down::
+	CHANGE_PROGRAM("Thumber_Off.exe")
 	Return
 
-<+>+down::
+<+>+up::
     Return
 
 <+>+right::
+
 appskey & esc::
     if A_IsAdmin
         Run, %A_ScriptFullPath%
     else
-        Run *RunAs %A_ScriptFullPath%    
+        Run *RunAs %A_ScriptFullPath%
     ExitApp
 	Return
-
-;****************************************************************
-;F15 기본세팅
-;****************************************************************
-helpManual()
-{
-	GetKeyState, stateF15, F15
-	;TrayTip ,testTitle, %stateF15%,1,1
-	if(stateF15 = 1)
-	{
-		Gui, Show, NoActivate
-		Return
-	}
-	Return
-}
-
-
-;****************************************************************
-; 매뉴얼 GUI  
-;****************************************************************
-; --- 이미지 파일이 있는지 먼저 확인 ---
-; GUI 정의
-
 
 
 F15 Up::
@@ -311,10 +227,8 @@ appsFunc:
 	}
 	if counter = 2 ; The key is pressed thrice
 	{
-		imagePath := A_ScriptDir . "\Thumber_help.png"
-		Gui +AlwaysOnTop +ToolWindow -Caption
-		Gui, Add, Picture, , %imagePath%
-		Gui, Show, , CenteredImage
+		helpCnt := IncreaseHelpCnt()
+		showHelp(helpCnt)
 	}
 	counter = -1
 	Return
@@ -484,7 +398,7 @@ F15 & f::
 ;****************************************************************
 ;		Date
 ;****************************************************************
-F15 & .:: 
+F15 & ,:: 
 	FormatTime, CurrentDateTime,, yyyyMMdd
 	SendInput %CurrentDateTime%
 	Return
