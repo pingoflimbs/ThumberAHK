@@ -1,0 +1,29 @@
+@echo off
+setlocal
+
+:: 1. 경로 설정
+set "B2E_CONVERTER=C:\Tools\BatToExe\Bat_To_Exe_ConverterC.exe"
+set "RUN_BAT=run.bat"
+set "RUN_EXE=run.exe"
+set "ICON_FILE=icon.ico"
+
+:: 2. run.bat 내용 생성
+> "%RUN_BAT%" echo @echo off
+>> "%RUN_BAT%" echo set TEST_PATH="BLA/BLA/BLA.exe"
+>> "%RUN_BAT%" echo %%TEST_PATH%%
+
+echo [INFO] run.bat 생성 완료
+
+:: 3. run.bat → run.exe 컴파일 (아이콘 포함)
+"%B2E_CONVERTER%" "%RUN_BAT%" "%RUN_EXE%" /ICON:"%ICON_FILE%"
+
+if exist "%RUN_EXE%" (
+    echo [SUCCESS] run.exe 생성 완료
+) else (
+    echo [ERROR] run.exe 생성 실패
+    pause
+    exit /b 1
+)
+
+pause
+exit /b 0
