@@ -1,11 +1,11 @@
-#NoEnv  ; 환경 변수를 자동으로 참조하지 않도록 설정합니다.성능 향상과 향후 AutoHotkey 버전과의 호환성을 위해 권장됩니다.변수 이름이 환경 변수와 충돌하는 것을 방지합니다.
+﻿#NoEnv  ; 환경 변수를 자동으로 참조하지 않도록 설정합니다.성능 향상과 향후 AutoHotkey 버전과의 호환성을 위해 권장됩니다.변수 이름이 환경 변수와 충돌하는 것을 방지합니다.
 SendMode Input  ; 키 입력을 보내는 방식을 'Input' 모드로 설정합니다.이 모드는 속도와 안정성 면에서 우수하여 새로운 스크립트에 권장됩니다.키 입력을 더 빠르고 정확하게 시뮬레이션할 수 있습니다.
 SetWorkingDir %A_ScriptDir%  ; 스크립트의 작업 디렉토리를 스크립트 파일이 위치한 폴더로 설정합니다.%A_ScriptDir%는 현재 실행 중인 스크립트의 디렉토리를 나타내는 내장 변수입니다.이를 통해 스크립트가 상대 경로를 사용할 때 일관된 시작 지점을 가질 수 있습니다.
 #MaxHotkeysPerInterval 10000; 지정된 시간 간격 동안 실행될 수 있는 최대 핫키 수를 설정합니다.기본값은 70이지만, 이를 10000으로 증가시켜 더 많은 핫키가 빠르게 연속해서 실행될 수 있도록 합니다.이는 매크로나 자동화 스크립트에서 유용할 수 있지만, 시스템 리소스를 많이 사용할 수 있으므로 주의가 필요합니다.
 #Persistent
 #SingleInstance, Force; Force를 추가하면, 스크립트가 이미 실행 중일 때 새로운 인스턴스가 시작되면 기존의 인스턴스를 자동으로 대체합니다.
 DetectHiddenWindows, On
-TrayTip ,ThumberBasic On, [Ver.20250611],1,1
+TrayTip ,ThumberBasic On,[Ver.20250613]`n캡스락을 세번눌러 도움말열기,1,1
 FileEncoding, UTF-8-RAW
 
 SetStoreCapsLockMode Off
@@ -135,18 +135,26 @@ ReKey(input_key) {
 ;****************************************************************
 ; 매뉴얼 GUI  
 ;****************************************************************
-;LEVEL 1
-; [{c:"#f0f0f0",t:"#a8a8a8"},"\n`\n\n\n~",{a:3},"\n\n\n\n\n!\n\n\n\n\n\n1","\n\n\n\n\n@\n\n\n\n\n\n2","\n\n\n\n\n#\n\n\n\n\n\n3","\n\n\n\n\n$\n\n\n\n\n\n4","\n\n\n\n\n%\n\n\n\n\n\n5","\n\n\n\n\n^\n\n\n\n\n\n6","\n\n\n\n\n&\n\n\n\n\n\n7","\n\n\n\n\n*\n\n\n\n\n\n8","\n\n\n\n\n(\n\n\n\n\n\n9","\n\n\n\n\n)\n\n\n\n\n\n0","\n\n\n\n\n_\n\n\n\n\n\n-","\n\n\n\n\n+\n\n\n\n\n\n=",{a:7,w:2},"\n\n\n\nBackspace"],
-; [{w:1.5},"\n\n\n\nTab","\n\n\n\nQ","\n\n\n\nW","\n\n\n\nE","\n\n\n\nR","\n\n\n\nT","\n\n\n\nY",{c:"#D0D4C0",t:"#000000",f:4},"◁\n\n\n\nU",{c:"#B8C0A8",f:6},"▲\n\n\n\nI",{c:"#D0D4C0",f:4},"▷\n\n\n\nO","△\n\n\n\nP",{c:"#f0f0f0",t:"#a8a8a8",f:3},"\n\n\n\n[","\n\n\n\n]",{w:1.5},"\n\n\n\n\\"],
-; [{c:"#ce4c31",t:"#000000",w:1.75},"Fn\n\n\n\nCaps Lock",{c:"#f0f0f0",t:"#a8a8a8"},"\n\n\n\nA","\n\n\n\nS","\n\n\n\nD",{c:"#C9B99B",t:"#000000",a:5,n:true},"Left\n\n\n\nF\n\nClick","Right\n\n\n\nG\n\nClick",{c:"#f0f0f0",t:"#a8a8a8",a:7},"\n\n\n\nH",{c:"#B8C0A8",t:"#000000",f:4,n:true},"◀\n\n\n\nJ",{f:6},"▼\n\n\n\nK",{f:4},"▶\n\n\n\nL",{c:"#D0D4C0"},"▽\n\n\n\n;",{c:"#f0f0f0",t:"#a8a8a8",f:3},"\n\n\n\n\"",{w:2.25},"\n\n\n\nEnter"],
-; [{w:2.25},"\n\n\n\nShift",{c:"#E0D5C7",t:"#000000",a:5},"Ctrl\n\n\n\nZ\n\nZ","Ctrl\n\n\n\nX\n\nX","Ctrl\n\n\n\nC\n\nC","Ctrl\n\n\n\nV\n\nV",{c:"#f0f0f0",t:"#a8a8a8",a:7},"\n\n\n\nB","\n\n\n\nN","\n\n\n\nM",{a:4},"\n,\n\n\n<","\n.\n\n\n>","\n/\n\n\n?",{a:7,w:2.75},"\n\n\n\nShift"],
-; [{w:1.25},"\n\n\n\nCtrl",{w:1.25},"\n\n\n\nWin",{w:1.25},"\n\n\n\nAlt",{w:6.25},"",{w:1.25},"\n\n\n\nAlt",{w:1.25},"\n\n\n\nWin",{w:1.25},"\n\n\n\nMenu",{w:1.25},"\n\n\n\nCtrl"]
+;lv1: 방향키,마우스
+;lv2: +ZXCV
+;lv3: +이전이후
+;LV4: +홈엔드
+;lv5: +페이지업다운
+;lv6: +이전앱 이후앱 
+;lv7: +창닫기 최소화 최대화
+;lv8: +ESC,Delete,Back,
+;lv9: +이전탭 이후탭
+;lv10: +단어 라인 전체
+;lv11: +날짜 
+;lv12: +하단바 
 
-; [{c:"#f0f0f0",t:"#a8a8a8"},"\n`\n\n\n~",{a:3},"\n\n\n\n\n!\n\n\n\n\n\n1","\n\n\n\n\n@\n\n\n\n\n\n2","\n\n\n\n\n#\n\n\n\n\n\n3","\n\n\n\n\n$\n\n\n\n\n\n4","\n\n\n\n\n%\n\n\n\n\n\n5","\n\n\n\n\n^\n\n\n\n\n\n6","\n\n\n\n\n&\n\n\n\n\n\n7","\n\n\n\n\n*\n\n\n\n\n\n8","\n\n\n\n\n(\n\n\n\n\n\n9","\n\n\n\n\n)\n\n\n\n\n\n0","\n\n\n\n\n_\n\n\n\n\n\n-","\n\n\n\n\n+\n\n\n\n\n\n=",{a:7,w:2},"\n\n\n\nBackspace"],
-; [{w:1.5},"\n\n\n\nTab","\n\n\n\nQ","\n\n\n\nW","\n\n\n\nE","\n\n\n\nR","\n\n\n\nT","\n\n\n\nY",{c:"#D0D4C0",t:"#000000",f:4},"◁\n\n\n\nU",{c:"#B8C0A8",f:6},"▲\n\n\n\nI",{c:"#D0D4C0",f:4},"▷\n\n\n\nO","△\n\n\n\nP",{c:"#f0f0f0",t:"#a8a8a8",f:3},"\n\n\n\n[","\n\n\n\n]",{w:1.5},"\n\n\n\n\\"],
-; [{c:"#ce4c31",t:"#000000",w:1.75},"Fn\n\n\n\nCaps Lock",{c:"#f0f0f0",t:"#a8a8a8"},"\n\n\n\nA","\n\n\n\nS","\n\n\n\nD",{c:"#C9B99B",t:"#000000",a:5,n:true},"Left\n\n\n\nF\n\nClick","Right\n\n\n\nG\n\nClick",{c:"#f0f0f0",t:"#a8a8a8",a:7},"\n\n\n\nH",{c:"#B8C0A8",t:"#000000",f:4,n:true},"◀\n\n\n\nJ",{f:6},"▼\n\n\n\nK",{f:4},"▶\n\n\n\nL",{c:"#D0D4C0"},"▽\n\n\n\n;",{c:"#f0f0f0",t:"#a8a8a8",f:3},"\n\n\n\n\"",{w:2.25},"\n\n\n\nEnter"],
-; [{w:2.25},"\n\n\n\nShift",{c:"#E0D5C7",t:"#000000",a:5},"Ctrl\n\n\n\nZ\n\nZ","Ctrl\n\n\n\nX\n\nX","Ctrl\n\n\n\nC\n\nC","Ctrl\n\n\n\nV\n\nV",{c:"#f0f0f0",t:"#a8a8a8",a:7},"\n\n\n\nB","\n\n\n\nN","\n\n\n\nM",{a:4},"\n,\n\n\n<","\n.\n\n\n>","\n/\n\n\n?",{a:7,w:2.75},"\n\n\n\nShift"],
-; [{w:1.25},"\n\n\n\nCtrl",{w:1.25},"\n\n\n\nWin",{w:1.25},"\n\n\n\nAlt",{w:6.25},"",{w:1.25},"\n\n\n\nAlt",{w:1.25},"\n\n\n\nWin",{w:1.25},"\n\n\n\nMenu",{w:1.25},"\n\n\n\nCtrl"]
+[{c:"#f0f0f0",t:"#a8a8a8\n\n\n\n#a8a8a8\n\n\n\n#000000\n#000000\n#000000"},"\n`\n\n\n~",{c:"#d1c6c0",t:"#000000\n#000000\n\n\n\n\n#000000\n\n\n\n\n#a8a8a8",a:1},"작업\n1번앱\n\n\n\n!\n표시줄\n\n\n\n\n1",{t:"#000000\n\n\n\n\n\n\n\n\n\n\n#a8a8a8",a:3},"2번앱\n\n\n\n\n@\n\n\n\n\n\n2","3번앱\n\n\n\n\n#\n\n\n\n\n\n3","4번앱\n\n\n\n\n$\n\n\n\n\n\n4","5번앱\n\n\n\n\n%\n\n\n\n\n\n5","6번앱\n\n\n\n\n^\n\n\n\n\n\n6","7번앱\n\n\n\n\n&\n\n\n\n\n\n7","8번앱\n\n\n\n\n*\n\n\n\n\n\n8","9번앱\n\n\n\n\n(\n\n\n\n\n\n9","10번앱\n\n\n\n\n)\n\n\n\n\n\n0",{c:"#f0f0f0"},"\n\n\n\n\n_\n\n\n\n\n\n-","\n\n\n\n\n+\n\n\n\n\n\n=",{t:"#000000\n\n\n\n#a8a8a8",a:7,w:2},"\n\n\n\nBackspace"],
+[{w:1.5},"\n\n\n\nTab",{c:"#b6cad6"},"Word\n\n\n\nQ","Line\n\n\n\nW","Whole\n\n\n\nE",{c:"#e0cdaa"},"이전\n\n\n\nR","이후\n\n\n\nT",{c:"#F0F0F0"},"\n\n\n\nY",{c:"#cad1be",f:4},"◁\n\n\n\nU",{c:"#B8C0A8",f:6},"▲\n\n\n\nI",{c:"#cad1be",f:4},"▷\n\n\n\nO","△\n\n\n\nP",{c:"#d7b7cf",f:3},"최대화\n\n\n\n[","앱닫기\n\n\n\n]",{c:"#f0f0f0",w:1.5},"\n\n\n\n\\"],
+[{c:"#ce4c31",f:6,w:1.75},"Fn\n\n\n\nCaps Lock",{c:"#a1b7c4",t:"#000000",f:3},"Delete\n\n\n\nA","ESC\n\n\n\nS",{t:"#000000\n#000000\n\n\n\n\n#000000",a:5},"Back\n\n\n\nD\n\nSpace",{c:"#C9B99B",t:"#000000\n\n\n\n#a8a8a8",a:7,n:true},"좌클릭\n\n\n\nF","우클릭\n\n\n\nG",{c:"#F0F0F0"},"\n\n\n\nH",{c:"#B8C0A8",f:4,n:true},"◀\n\n\n\nJ",{f:6},"▼\n\n\n\nK",{f:4},"▶\n\n\n\nL",{c:"#cad1be"},"▽\n\n\n\n;",{c:"#d7b7cf",f:3},"최소화\n\n\n\n\"",{c:"#f0f0f0",w:2.25},"\n\n\n\nEnter"],
+[{w:2.25},"\n\n\n\nShift",{c:"#aacaaa",t:"#000000\n#000000\n\n\n#a8a8a8\n\n#000000",a:5},"Ctrl\n\n\n\nZ\n\nZ","Ctrl\n\n\n\nX\n\nX","Ctrl\n\n\n\nC\n\nC","Ctrl\n\n\n\nV\n\nV",{c:"#dfb6b6"},"날짜\n\n\n\nB\n\n프린트",{c:"#bda8c0",t:"#000000\n\n\n\n#a8a8a8",a:7},"이전앱\n\n\n\nN","이후앱\n\n\n\nM",{c:"#c1b9cc",t:"#a8a8a8\n\n\n\n#a8a8a8\n\n\n\n#000000\n#000000\n#000000",a:4},"\n,\n\n\n<\n\n\n\n\n이전탭","\n.\n\n\n>\n\n\n\n\n이후탭",{c:"#f0f0f0"},"\n/\n\n\n?",{t:"#000000\n\n\n\n#a8a8a8",a:7,w:2.75},"\n\n\n\nShift"],
+[{w:1.25},"\n\n\n\nCtrl",{w:1.25},"\n\n\n\nWin",{w:1.25},"\n\n\n\nAlt",{w:6.25},"",{w:1.25},"\n\n\n\nAlt",{w:1.25},"\n\n\n\nWin",{w:1.25},"\n\n\n\nMenu",{w:1.25},"\n\n\n\nCtrl"]
+
+
 
 ;****************************************************************
 ; FnKey
