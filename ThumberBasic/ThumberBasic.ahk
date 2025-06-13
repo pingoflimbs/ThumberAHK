@@ -138,15 +138,15 @@ ReKey(input_key) {
 ;lv1: 방향키,마우스
 ;lv2: +ZXCV
 ;lv3: +이전이후
-;LV4: +홈엔드
-;lv5: +페이지업다운
+;lv4: +페이지업다운
+;LV5: +홈엔드
 ;lv6: +이전앱 이후앱 
 ;lv7: +창닫기 최소화 최대화
 ;lv8: +ESC,Delete,Back,
 ;lv9: +이전탭 이후탭
 ;lv10: +단어 라인 전체
 ;lv11: +날짜 
-;lv12: +하단바 
+;lv12: +하단바
 
 [{c:"#f0f0f0",t:"#a8a8a8\n\n\n\n#a8a8a8\n\n\n\n#000000\n#000000\n#000000"},"\n`\n\n\n~",{c:"#d1c6c0",t:"#000000\n#000000\n\n\n\n\n#000000\n\n\n\n\n#a8a8a8",a:1},"작업\n1번앱\n\n\n\n!\n표시줄\n\n\n\n\n1",{t:"#000000\n\n\n\n\n\n\n\n\n\n\n#a8a8a8",a:3},"2번앱\n\n\n\n\n@\n\n\n\n\n\n2","3번앱\n\n\n\n\n#\n\n\n\n\n\n3","4번앱\n\n\n\n\n$\n\n\n\n\n\n4","5번앱\n\n\n\n\n%\n\n\n\n\n\n5","6번앱\n\n\n\n\n^\n\n\n\n\n\n6","7번앱\n\n\n\n\n&\n\n\n\n\n\n7","8번앱\n\n\n\n\n*\n\n\n\n\n\n8","9번앱\n\n\n\n\n(\n\n\n\n\n\n9","10번앱\n\n\n\n\n)\n\n\n\n\n\n0",{c:"#f0f0f0"},"\n\n\n\n\n_\n\n\n\n\n\n-","\n\n\n\n\n+\n\n\n\n\n\n=",{t:"#000000\n\n\n\n#a8a8a8",a:7,w:2},"\n\n\n\nBackspace"],
 [{w:1.5},"\n\n\n\nTab",{c:"#b6cad6"},"Word\n\n\n\nQ","Line\n\n\n\nW","Whole\n\n\n\nE",{c:"#e0cdaa"},"이전\n\n\n\nR","이후\n\n\n\nT",{c:"#F0F0F0"},"\n\n\n\nY",{c:"#cad1be",f:4},"◁\n\n\n\nU",{c:"#B8C0A8",f:6},"▲\n\n\n\nI",{c:"#cad1be",f:4},"▷\n\n\n\nO","△\n\n\n\nP",{c:"#d7b7cf",f:3},"최대화\n\n\n\n[","앱닫기\n\n\n\n]",{c:"#f0f0f0",w:1.5},"\n\n\n\n\\"],

@@ -153,8 +153,6 @@ showHelp(level)
 	x += %xpad%
 	Gui, Add, Button, x%x%+%xpad% y%y% w80 h80, gButton6, Button6	
 	x += %xpad%
-	Gui, Add, Checkbox, vMyCheckBox1, checkBox
-	x += %xpad%
 
 	Gui, Show, , 
 	WinSet, Transparent, 240, CenteredImage
