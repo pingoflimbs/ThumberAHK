@@ -135,9 +135,59 @@ showHelp(level)
 {
 	Gui +AlwaysOnTop +ToolWindow -Caption
 	Gui, Add, Picture, , %imagePath%
-	Gui, Show, , CenteredImage
-	WinSet, Transparent, 180, CenteredImage
+	y := 540
+	x := 20
+	xpad := 100
+	; 버튼 추가 (위치와 크기 조정 가능)
+	; 게임모드
+
+	Gui, Add, Button, x%x%+%xpad% y%y% w80 h80, gButton1, Button1
+	x += %xpad%
+	Gui, Add, Button, x%x%+%xpad% y%y% w80 h80, gButton2, Button2
+	x += %xpad%
+	Gui, Add, Button, x%x%+%xpad% y%y% w80 h80, gButton3, Button3
+	x += %xpad%
+	Gui, Add, Button, x%x%+%xpad% y%y% w80 h80, gButton4, Button4
+	x += %xpad%
+	Gui, Add, Button, x%x%+%xpad% y%y% w80 h80, gButton5, Button5
+	x += %xpad%
+	Gui, Add, Button, x%x%+%xpad% y%y% w80 h80, gButton6, Button6	
+	x += %xpad%
+	Gui, Add, Checkbox, vMyCheckBox1, checkBox
+	x += %xpad%
+
+	Gui, Show, , 
+	WinSet, Transparent, 240, CenteredImage
 }
+
+; 각 버튼에 대한 핸들러
+;시작프로그램에 등록
+;16진수계산기..?
+;메모장?
+;뭐할라했지..?
+Button1:  
+return
+
+Button2:
+	Gui, Submit, NoHide  ; GUI 상태를 스크립트 변수로 반영
+	MsgBox, chkbox: %MyCheckBox1%
+return
+
+Button3:
+    MsgBox, Button 3 Clicked
+return
+
+Button4:
+    MsgBox, Button 4 Clicked
+return
+
+Button5:
+    MsgBox, Button 5 Clicked
+return
+
+Button6:
+    MsgBox, Button 6 Clicked
+return
 
 ;****************************************************************
 ; 설정파일
@@ -164,7 +214,8 @@ SaveIni(sec, key, value) {
 }
 
 IncreaseHelpCnt()
-{	
+{
+	global SEC_Help, KEY_LoadCnt
 	val := LoadIni(SEC_Help, KEY_LoadCnt)
 	val++
 	SaveIni(SEC_Help, KEY_LoadCnt, val)
