@@ -20,7 +20,7 @@ FileEncoding, UTF-8-RAW
 ;    \_/    \__|  \__|\__|  \__|\______|\__|  \__|\_______/ \________|\________| \______/ 
 
 
-global imagePath := A_ScriptDir . "\Thumber.png"
+global imageDir := A_ScriptDir . "\"
 global IniFile := A_ScriptDir . "\Thumber.ini"
 global SEC_Help := "Help"
 global KEY_LoadCnt := "LoadCnt"
@@ -133,9 +133,12 @@ CHANGE_PROGRAM(exeName)
 ; GUI 정의
 showHelp(level)
 {
+	global imageDir
+	imagePath := imageDir . "ThumberBasic_lv" . level . ".png"
+
 	Gui +AlwaysOnTop +ToolWindow -Caption
 	Gui, Add, Picture, , %imagePath%
-	y := 540
+	y := 640
 	x := 20
 	xpad := 100
 	; 버튼 추가 (위치와 크기 조정 가능)
@@ -155,7 +158,7 @@ showHelp(level)
 	x += %xpad%
 
 	Gui, Show, , 
-	WinSet, Transparent, 240, CenteredImage
+	WinSet, Transparent, 200, CenteredImage
 }
 
 ; 각 버튼에 대한 핸들러
@@ -277,7 +280,42 @@ appsFunc:
 	if counter = 2 ; The key is pressed thrice
 	{
 		helpCnt := IncreaseHelpCnt()
-		showHelp(helpCnt)
+		if helpCnt <4
+		{
+			showHelp(1)
+		}
+		else if helpCnt < 7
+		{
+			showHelp(2)
+		}
+		else if helpCnt < 10
+		{
+			showHelp(3)
+		}
+		else if helpCnt < 13
+		{
+			showHelp(4)
+		}
+		else if helpCnt < 16
+		{
+			showHelp(5)
+		}
+		else if helpCnt < 19
+		{
+			showHelp(6)
+		}
+		else if helpCnt < 22
+		{
+			showHelp(7)
+		}
+		else if helpCnt < 25
+		{
+			showHelp(8)
+		}
+		else
+		{
+			showHelp(9)
+		}		
 	}
 	counter = -1
 	Return
