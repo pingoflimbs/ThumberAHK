@@ -125,6 +125,7 @@ CHANGE_PROGRAM(exeName)
 	ExitApp
 }
 
+Gui, Add, Picture, vHelpImage , %imagePath%
 
 ;****************************************************************
 ; 매뉴얼 GUI  
@@ -136,14 +137,30 @@ showHelp(level)
 	global imageDir
 	imagePath := imageDir . "ThumberBasic_lv" . level . ".png"
 
-	Gui +AlwaysOnTop +ToolWindow -Caption
-	Gui, Add, Picture, , %imagePath%
+	; MsgBox, , , %imagePath%
+
+	Gui +AlwaysOnTop +ToolWindow -Caption			
+	
+    ; 이미 GUI가 초기화되지 않았다면 초기화
+    if (!GuiHasInit)
+	{
+		; Gui, Add, Picture, vHelpImage w600 h400, %imagePath%
+		; Gui, Add, Picture, vHelpImage , %imagePath%
+		GuiHasInit := true
+	}
+	else
+	{		
+		GuiControl, , vHelpImage, %imagePath%
+	}
+	; Gui, Add, Picture, , %imagePath%
 	y := 640
 	x := 20
 	xpad := 100
 	; 버튼 추가 (위치와 크기 조정 가능)
 	; 게임모드
 
+	if (!ButtonHasInit)
+	{
 	Gui, Add, Button, x%x%+%xpad% y%y% w80 h80, gButton1, Button1
 	x += %xpad%
 	Gui, Add, Button, x%x%+%xpad% y%y% w80 h80, gButton2, Button2
@@ -156,9 +173,10 @@ showHelp(level)
 	x += %xpad%
 	Gui, Add, Button, x%x%+%xpad% y%y% w80 h80, gButton6, Button6	
 	x += %xpad%
+	}
 
 	Gui, Show, , 
-	WinSet, Transparent, 200, CenteredImage
+	WinSet, Transparent, 80, CenteredImage
 }
 
 ; 각 버튼에 대한 핸들러
@@ -279,7 +297,8 @@ appsFunc:
 	}
 	if counter = 2 ; The key is pressed thrice
 	{
-		helpCnt := IncreaseHelpCnt()
+		helpCnt := IncreaseHelpCnt()		
+		
 		if helpCnt <4
 		{
 			showHelp(1)
