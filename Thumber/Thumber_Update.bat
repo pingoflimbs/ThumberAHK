@@ -13,8 +13,8 @@ set AHK2EXE="%ProgramFiles%\AutoHotkey\Compiler\Ahk2Exe.exe"
 set SCRIPT_DIR=%~dp0
 set TARGET_DIR=%APPDATA%\ThumberAHK\%PRJ_NAME%
 set TMP_DIR=%APPDATA%\ThumberAHK\%PRJ_NAME%\Temp
-:: set STARTUP_FOLDER=%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup
-:: set STARTUP_FOLDER_COMMON=C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp
+set STARTUP_FOLDER=%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup
+set STARTUP_FOLDER_COMMON=C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp
 
 
 
@@ -102,10 +102,9 @@ powershell -noprofile -command ^
 
 ::echo -5-------------------------------------------------------------------------
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-:: echo shortcut file copy to startup
-:: del /Y "%STARTUP_FOLDER_COMMON%\%SHORTCUT_NAME%" >nul 2>&1
-:: copy /Y "%TARGET_DIR%\%SHORTCUT_NAME%" "%STARTUP_FOLDER_COMMON%\%SHORTCUT_NAME%"
-:: del /Y "%TARGET_DIR%\%SHORTCUT_NAME%" >nul 2>&1
+echo shortcut file copy to startup
+del /Y "%STARTUP_FOLDER_COMMON%\%SHORTCUT_NAME%" >nul 2>&1
+copy /Y "%TARGET_DIR%\%SHORTCUT_NAME%" "%STARTUP_FOLDER_COMMON%\%SHORTCUT_NAME%"
 
 
 echo -6-------------------------------------------------------------------------
